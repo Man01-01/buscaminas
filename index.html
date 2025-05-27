@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscaminas - Proyecto Individual</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-dark bg-dark px-3">
+    <span class="navbar-brand mb-0 h1">Proyecto Individual</span>
+    <button class="btn btn-outline-light" onclick="toggleMenu()">☰  Menú</button>
+  </nav>
+
+  <div class="menu-opciones bg-light p-3 d-none" id="menuOpciones">
+    <button class="btn btn-secondary m-1" onclick="mostrar('seccion1')">Inicio</button>
+    <button class="btn btn-secondary m-1" onclick="mostrar('seccion2')">Buscaminas</button>
+    <button class="btn btn-secondary m-1" onclick="mostrar('seccion3')">Récords</button>
+  </div>
+
+  <main class="container mt-4">
+    <section id="seccion1">
+      <h2>Inicio</h2>
+      <p>Bienvenido al Buscaminas.</p>
+      <img src="img/buscaminas.png" alt="Imagen de Buscaminas" class="img-fluid mt-3" style="max-width: 500px;">
+    </section>
+
+
+    <section id="seccion2" class="d-none">
+      <h2>Buscaminas</h2>
+      <div class="mb-3">
+        <label for="dificultad">Dificultad:</label>
+        <select id="dificultad" class="form-select w-auto d-inline-block">
+          <option value="" disabled selected>Seleccione dificultad</option>
+          <option value="facil">Fácil (8x8 10 bombas)</option>
+          <option value="media">Media (12x12 25 bombas)</option>
+          <option value="dificil">Difícil (16x16 50 bombas)</option>
+        </select>
+        <div class="mb-3">
+         <label for="nombreJugador">Nombre del Jugador:</label>
+         <input type="text" id="nombreJugador" class="form-control w-auto d-inline-block ms-2" placeholder="Tu nombre">
+        </div>
+
+        <button class="btn btn-success" onclick="iniciarJuegoDesdeSelect()">Inicio</button>
+        <button onclick="reiniciarTablero()" class="btn btn-warning">Reiniciar Tablero</button>
+        <button onclick="reiniciarRecords()" class="btn btn-danger">Reiniciar Récords</button>
+      </div>
+      <div id="instrucciones" class="mb-2">
+        <strong>Click izquierdo:</strong> Revelar celda |
+        <strong>Click derecho:</strong> Colocar/quitar bandera
+      </div>
+      <div id="info" class="mb-2">
+        <span id="tiempo">Tiempo: 0s</span> |
+        <span id="banderas">Banderas: 0 / 0</span>
+      </div>
+      <div id="tablero" class="tablero"></div>
+    </section>
+
+    <section id="seccion3" class="d-none">
+      <h2>Récords</h2>
+      <ul id="lista-records" class="list-group"></ul>
+      <button onclick="reiniciarRecords()" class="btn btn-danger">Reiniciar Récords</button>
+    </section>
+  </main>
+
+<!-- Modal de Resultado del Juego -->
+<div class="modal fade" id="modalResultado" tabindex="-1" aria-labelledby="modalResultadoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalResultadoLabel">Resultado del Juego</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body" id="modalMensaje">
+        <!-- Aquí va el mensaje como "¡Ganaste!" o "¡Perdiste!" -->
+         <p id="mensajeTexto"></p>
+         <img id="modalGif" src="" alt="Resultado GIF" class="img-fluid" style="max-height: 200px;" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="btnReintentar">Reintentar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Mensaje General -->
+<div class="modal fade" id="modalMensajeGeneral" tabindex="-1" aria-labelledby="modalMensajeGeneralLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalMensajeGeneralLabel">Mensaje</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+     <div class="modal-body text-center">
+       <img id="gifModalMensajeGeneral" src="" class="img-fluid my-3" style="max-height: 200px; display: none;" />
+       <div id="contenidoModalMensajeGeneral"></div>
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
